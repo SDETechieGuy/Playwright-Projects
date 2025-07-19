@@ -14,10 +14,11 @@ test('Rahul Shetty Website Incorrect Login Assertion Page Context TC 1', async (
   //div[text='Incorrect username/password.']  
 });
 
-test.only('Rahul Shetty Website correct Login Assertion Page Context TC 2', async ({ page }) => {
+test('Rahul Shetty Website correct Login Assertion Page Context TC 2', async ({ page }) => {
   const usernme = page.locator("input#username");//locators dont need await as we aren't performing any actions
   const passwd = page.locator("input#password");
   const submitbtn = page.locator("input[type='submit']");
+  const cardlocator = page.locator(".card-body a");
 
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
   console.log("Title of Rahul shetty website when loaded is:"+ await page.title());
@@ -29,10 +30,12 @@ test.only('Rahul Shetty Website correct Login Assertion Page Context TC 2', asyn
   await usernme.fill("");//This will empty the usernme field
   await usernme.fill("rahulshettyacademy");
   await page.locator("input[type='submit']").click();
-  console.log(await page.locator(".card-body a").nth(0).textContent());
-  console.log(await page.locator(".card-body a").first().textContent());
+  console.log(await cardlocator.nth(2).textContent());
+  console.log(await cardlocator.first().textContent());
+  console.log("All Card titles: "+await cardlocator.allTextContents());
   //div[text='Incorrect username/password.']
 });
+
 
 test('Browser Context TC 3', async ({ browser }) => {
 
