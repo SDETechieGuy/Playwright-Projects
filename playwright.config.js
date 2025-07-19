@@ -5,10 +5,11 @@ const config = ({
   reporter: 'html',
   timeout: 40000,
   expect : {
-    timeout: 35000
+    timeout: 3000
   },
   use: {
-    browserName: 'chromium'   
+    browserName: 'chromium',
+    headless: false
   },
 });
 module.exports=config
