@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test.only('Rahul Shetty Website Incorrect Login Assertoom Page Context TC 2', async ({ page }) => {
+test('Rahul Shetty Website Incorrect Login Assertion Page Context TC 1', async ({ page }) => {
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
   console.log("Title of Rahul shetty website when loaded is:"+ await page.title());
   await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
@@ -14,7 +14,27 @@ test.only('Rahul Shetty Website Incorrect Login Assertoom Page Context TC 2', as
   //div[text='Incorrect username/password.']  
 });
 
-test('Browser Context TC 2', async ({ browser }) => {
+test.only('Rahul Shetty Website correct Login Assertion Page Context TC 2', async ({ page }) => {
+  const usernme = page.locator("input#username");//locators dont need await as we aren't performing any actions
+  const passwd = page.locator("input#password");
+  const submitbtn = page.locator("input[type='submit']");
+
+  await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+  console.log("Title of Rahul shetty website when loaded is:"+ await page.title());
+  await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
+  await usernme.fill("rahulshetty");
+  await passwd.fill("learning");
+  await page.locator("input#terms").click();
+  await page.locator("input[type='submit']").click();
+  await usernme.fill("");//This will empty the usernme field
+  await usernme.fill("rahulshettyacademy");
+  await page.locator("input[type='submit']").click();
+  console.log(await page.locator(".card-body a").nth(0).textContent());
+  console.log(await page.locator(".card-body a").first().textContent());
+  //div[text='Incorrect username/password.']
+});
+
+test('Browser Context TC 3', async ({ browser }) => {
 
   const context = await browser.newContext();
   const page = await context.newPage();
